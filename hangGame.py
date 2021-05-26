@@ -2,22 +2,27 @@ import random
 import os
 
 def game(wordGame):
-    #Creates an string of '_' with tha same number of components as the hidden word.
+    # Creates an string of '_' with the same number of components as the hidden word.
     hiddenWord = ["_" for i in wordGame]
     
+    # Main bucle of the game while the correct word is not fully guessed
     while hiddenWord != [i[1] for i in wordGame]:
+
         print(hiddenWord)
-        leterInput = input('Choose a leter').upper()
+        # for leter in hiddenWord:
+
+        # The user should write a single leter per turn.
+        leterInput = input('Elige una letra: ').upper()
+
+        # Cicle that compares every input with all the elements in the chosen word
         for item in wordGame:
             if leterInput == item[1]:
                 hiddenWord[item[0]] = item[1]
-        
-        
+                
         os.system("clear")
 
         if hiddenWord == [i[1] for i in wordGame]:
-            print('Congratulations! \n You Won!')
-
+            print('¡Felicidadez! \n¡Has Ganado!')
 
 
 def selectWord(): #funtion that selects a random word from a database
@@ -34,7 +39,6 @@ def selectWord(): #funtion that selects a random word from a database
     return nChosenWord
 
 
-
 def run(): #Global function
     wordGame = selectWord() #Call to select a word from a database
     print(wordGame)
@@ -42,8 +46,6 @@ def run(): #Global function
 
     game(wordGame)
 
-    # os.system("clear")
-
-
+    
 if __name__ == "__main__":
     run()
