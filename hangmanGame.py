@@ -8,7 +8,7 @@ def game(wordGame):
     noAccents = ['A', 'E', 'I', 'O', 'U']
     noAccentsWordGame = [list(tup) for tup in wordGame] #changes a list of tupples to a list of lists
 
-    # Code to temporary eliminate accents
+    # Code to temporary eliminate accents from spanish words
     for element in wordGame:
         for char in accents:
             if char[1] == element[1]:
