@@ -21,20 +21,26 @@ def game(wordGame):
         for leter in hiddenWord:
             print(leter + ' ', end='')
 
-                # The user should write a single leter per turn.
+        # The user should write a single leter per turn.
         leterInput = input('\nElige una letra: ').upper()
+        try:
+            if leterInput.isdigit() or len(leterInput) > 1:
+                raise ValueError('Debes ingresar una sola letra a la vez y no escribir números')
 
         # Cicle that compares every input with all the elements in the chosen word
-        for item in noAccentsWordGame:
-            if leterInput == item[1]:
-                hiddenWord[item[0]] = item[1]
+            for item in noAccentsWordGame:
+                if leterInput == item[1]:
+                    hiddenWord[item[0]] = item[1]
                 
-        os.system("clear")
+            os.system("clear")
 
-        if hiddenWord == [i[1] for i in noAccentsWordGame]:
-            for leter in [i[1] for i in wordGame]:
-                print(leter, end='')
-            print('\n¡Felicidadez! \n¡Has Ganado!')
+            if hiddenWord == [i[1] for i in noAccentsWordGame]:
+                for leter in [i[1] for i in wordGame]:
+                    print(leter, end='')
+                print('\n¡Felicidadez! \n¡Has Ganado!')
+        except ValueError as ve:
+            os.system("clear")
+            print(ve)
 
 
 def selectWord(): #funtion that selects a random word from a database
