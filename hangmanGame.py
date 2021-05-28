@@ -50,7 +50,10 @@ def game(wordGame):
             for item in noAccentsWordGame:
                 if leterInput == item[1]:
                     hiddenWord[item[0]] = item[1]
-                    turn -= 1
+            
+            # Cicle that controls the number of turns if the user matches a leter
+            if leterInput in [i[1] for i in noAccentsWordGame]:
+                turn -= 1
                 
             os.system('clear')
 
