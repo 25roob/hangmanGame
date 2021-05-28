@@ -1,12 +1,28 @@
 import random
 import os
 
+def artAscii(turn):
+    fileN = 0
+    if turn > 8:
+        fileN = 8
+    elif turn < 1:
+        fileN = 1
+    else:
+        fileN = turn 
+    
+    with open('./files/artAscii_%s.txt' %fileN, 'r', encoding='utf-8') as f:
+        for line in f:
+            print(line, end='')
+    print('\n')
+        
+
 def game(wordGame):
     # Creates an string of '_' with the same number of components as the hidden word.
-    hiddenWord = ["_" for i in wordGame]
+    hiddenWord = ['_' for i in wordGame]
     accents = [(0, 'Á'), (1, 'É'), (2, 'Í'), (3, 'Ó'), (4, 'Ú')]
     noAccents = ['A', 'E', 'I', 'O', 'U']
     noAccentsWordGame = [list(tup) for tup in wordGame] #changes a list of tupples to a list of lists
+    turn = 0
 
     # Code to temporary eliminate accents from spanish words
     for element in wordGame:
@@ -16,6 +32,9 @@ def game(wordGame):
     
     # Main bucle of the game while the correct word is not fully guessed
     while hiddenWord != [i[1] for i in noAccentsWordGame]:
+        turn += 1
+
+        artAscii(turn)
 
         # print hiddenWord in a fashionable way "_ _ _ _"
         for leter in hiddenWord:
@@ -25,27 +44,28 @@ def game(wordGame):
         leterInput = input('\nElige una letra: ').upper()
         try:
             if leterInput.isdigit() or len(leterInput) > 1:
-                raise ValueError('Debes ingresar una sola letra a la vez y no escribir números')
+                raise ValueError('Debes ingresar una sola letra a la vez y no escribir números.')
 
         # Cicle that compares every input with all the elements in the chosen word
             for item in noAccentsWordGame:
                 if leterInput == item[1]:
                     hiddenWord[item[0]] = item[1]
+                    turn -= 1
                 
-            os.system("clear")
+            os.system('clear')
 
             if hiddenWord == [i[1] for i in noAccentsWordGame]:
                 for leter in [i[1] for i in wordGame]:
                     print(leter, end='')
                 print('\n¡Felicidadez! \n¡Has Ganado!')
         except ValueError as ve:
-            os.system("clear")
+            os.system('clear')
             print(ve)
 
 
 def selectWord(): #funtion that selects a random word from a database
     astate = []
-    with open("./files/data.txt", "r", encoding="utf-8") as f:
+    with open('./files/data.txt', 'r', encoding='utf-8') as f:
         for line in f:
             astate.append(line)
 
@@ -58,7 +78,7 @@ def selectWord(): #funtion that selects a random word from a database
 
 
 def run(): #Global function
-    os.system("clear")
+    os.system('clear')
     wordGame = selectWord() #Call to select a word from a database
     print(wordGame)
     print([i[1] for i in wordGame])
