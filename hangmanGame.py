@@ -37,11 +37,12 @@ def game(wordGame):
         artAscii(turn)
 
         # print hiddenWord in a fashionable way "_ _ _ _"
+        print('-------> ', end='')
         for leter in hiddenWord:
             print(leter + ' ', end='')
 
         # The user should write a single leter per turn.
-        leterInput = input('\nElige una letra: ').upper()
+        leterInput = input('\n-------> Elige una letra: ').upper()
         try:
             if leterInput.isdigit() or len(leterInput) > 1:
                 raise ValueError('Debes ingresar una sola letra a la vez y no escribir números.')
@@ -58,6 +59,9 @@ def game(wordGame):
             os.system('clear')
 
             if hiddenWord == [i[1] for i in noAccentsWordGame]:
+                turn += 1
+                artAscii(turn)
+                print('\n')
                 for leter in [i[1] for i in wordGame]:
                     print(leter, end='')
                 print('\n¡Felicidadez! \n¡Has Ganado!')
@@ -83,8 +87,8 @@ def selectWord(): #funtion that selects a random word from a database
 def run(): #Global function
     os.system('clear')
     wordGame = selectWord() #Call to select a word from a database
-    print(wordGame)
-    print([i[1] for i in wordGame])
+    # print(wordGame)
+    # print([i[1] for i in wordGame])
 
     game(wordGame)
 
