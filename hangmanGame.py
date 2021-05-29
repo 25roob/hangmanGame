@@ -86,11 +86,25 @@ def selectWord(): #funtion that selects a random word from a database
 
 def run(): #Global function
     os.system('clear')
-    wordGame = selectWord() #Call to select a word from a database
-    # print(wordGame)
-    # print([i[1] for i in wordGame])
 
-    game(wordGame)
+    print('¡Vienvenido al juego del ahoracado "Hangman game"!')
+
+    active = ''
+
+    while active != 'N':
+        wordGame = selectWord() #Call to select a word from a database
+        # print(wordGame)
+        # print([i[1] for i in wordGame])
+
+        game(wordGame)
+        
+        print('¿Quieres jugar otra ronda?')
+        active = input('presiona "N" + "Enter" para terminar el juego, o solo "Enter" para volver a jugar: ').upper()
+
+        
+        if active == 'N':
+            print('Juego terminado.')
+
 
     
 if __name__ == "__main__":
