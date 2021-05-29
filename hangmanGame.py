@@ -37,12 +37,12 @@ def game(wordGame):
         artAscii(turn)
 
         # print hiddenWord in a fashionable way "_ _ _ _"
-        print('-------> ', end='')
+        print('---------------> ', end='')
         for leter in hiddenWord:
             print(leter + ' ', end='')
 
         # The user should write a single leter per turn.
-        leterInput = input('\n-------> Elige una letra: ').upper()
+        leterInput = input('\n---------------> Elige una letra: ').upper()
         try:
             if leterInput.isdigit() or len(leterInput) > 1:
                 raise ValueError('Debes ingresar una sola letra a la vez y no escribir números.')
@@ -61,13 +61,15 @@ def game(wordGame):
             if hiddenWord == [i[1] for i in noAccentsWordGame]:
                 turn += 1
                 artAscii(turn)
-                print('\n')
+                
+                print('¡Felicidadez! \n¡Has adivinado la palabra!\n\nLa palabra era: ', end='')
                 for leter in [i[1] for i in wordGame]:
                     print(leter, end='')
-                print('\n¡Felicidadez! \n¡Has Ganado!')
+                
         except ValueError as ve:
             os.system('clear')
             print(ve)
+            turn -= 1
 
 
 def selectWord(): #funtion that selects a random word from a database
@@ -98,9 +100,10 @@ def run(): #Global function
 
         game(wordGame)
         
-        print('¿Quieres jugar otra ronda?')
-        active = input('presiona "N" + "Enter" para terminar el juego, o solo "Enter" para volver a jugar: ').upper()
+        print('\n\n¿Quieres jugar otra ronda?')
+        active = input('Escribe "N" y presiona "Enter" para terminar el juego, o solo "Enter" para volver a jugar: ').upper()
 
+        os.system('clear')
         
         if active == 'N':
             print('Juego terminado.')
